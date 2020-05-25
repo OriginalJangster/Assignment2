@@ -1,68 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+CPSC 436I - Assignment 2: React and Redux
 
-## Available Scripts
+DUE DATE: Monday, June 1 (10PM)
+-	Final code must be committed to a Github repo before 10pm
+-	Keep your repo private
 
-In the project directory, you can run:
+This assignment was completed based on the following criteria.
 
-### `yarn start`
+Postings Website 2.0!
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+For the second assignment, you’ll be essentially re-creating your assignment 1, but this time with React+Redux! The requirements are slightly different, and you may use as much of your assignment 1 code as you would like, or create something new if you’re feeling adventurous.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+We’re expecting the following:
 
-### `yarn test`
+1)	You MUST use React AND Redux, and start your assignment with the create-react-app boilerplate code. Remember, you will be asked to explain sections of your code.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2)	Some kind of text input or textarea, to write out a message, as well as a button to add the message to a list. (A button to clear the form is optional.)
 
-### `yarn build`
+3)	Some pre-loaded message list data stored in your reducer.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4)	A list made up of list items that contain the message text (it should be updated with the new message whenever you click the add button)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+5)	Basic styling. (Do not spend too much time on this, and re-use as much as you’d like from Assignment 1!)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+6)	*NEW* The ability to click on the list item to go to a “detailed” view. This view may appear next to the list or appear in a pop-up/dialog. The goal here is for this “detail” view to know which item was selected. The detailed view MUST be its own React component.
 
-### `yarn eject`
+7)	Something cool and extra! This is wide open for you to explore, and try to push your knowledge and boundaries.
+For example:
+-	you could have individual buttons for each message list item that will allow you to delete them (e.g. a button with an X)
+-	you could have additional form elements that show up in the messages (e.g. a text input for name, a dropdown that includes different options, etc.)
+-	A toggle for each list item that does something!
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+NOTE FOR IMPLEMENTATION: DO NOT try to take your assignment 1 code, and re-shape it into React components. Instead, start with create-react-app, and think about how you would organize your component structure. Begin to create those components, and then copy over pieces of your assignment 1 code as needed. Remember that handling actions and rendering the view is handled much differently in React+Redux. If you find yourself needing to use HTML DOM functions (e.g. document.getElementById),then STOP, and try to think of the “React” way to do the same thing.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+As described in the individual assignment rubric, your code will need to meet these requirements and be functional, up to perhaps a few minor glitches in tricky cases. Note that functionality includes both user-visible and console-visible issues.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+It’s up to you! We’re hoping that you’ll use the above requirements as a guide, but that you’ll let your imagination take over, and build something unique and interesting!
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+You should be ready to demo this to a TA during your second week lab, and should be ready to answer questions about it, as well as explaining what you’ve done.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+HAVE FUN!!!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
