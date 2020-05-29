@@ -1,7 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addToList} from "../actions";
-import ListArea from "./ListArea";
 
 class InputField extends React.Component {
     constructor(props) {
@@ -24,8 +22,7 @@ class InputField extends React.Component {
         } else {
             event.preventDefault();
             alert('A message was added to the list: ' + this.state.value);
-            // this.props.addToList(this.state.value);
-            this.props.messages.push(this.state.value);
+            this.props.addToList(this.state.value);
             console.log(this.props.messages);
             // how do i re-render listarea?
             this.setState({value: ""});
@@ -54,4 +51,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {addToList}) (InputField);
+const mapDispatchToProps = dispatch => {
+    return {
+        // dispatching plain actions
+        addToList: (message) => dispatch({ type: 'ADD_TO_LIST', payload: message })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (InputField);

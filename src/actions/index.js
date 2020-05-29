@@ -12,6 +12,13 @@ export const clearList = () => {
     };
 };
 
+export const viewDetails = (itemID) => {
+    return {
+        type: 'VIEW_DETAILS',
+        payload: itemID
+    }
+}
+
 // export const setVisibilityFilter = filter => {
 //     return {
 //         type: 'SET_VISIBILITY',

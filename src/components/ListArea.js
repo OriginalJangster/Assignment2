@@ -2,31 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 
 class ListArea extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            list: this.props.messages
-        }
-    }
 
-    deleteRow = (message) => {
-        let index = this.props.messages.indexOf(message);
-        this.props.messages.splice(index, 1);
-        this.setState({value: this.props.messages});
-        console.log(this.props.messages);
-    }
-
-    changeHandler = (event) => {
-        this.setState({list: this.props.messages});
-    }
+    // deleteRow = (message) => {
+    //     let index = this.props.messages.indexOf(message);
+    //     this.props.messages.splice(index, 1);
+    //     console.log(this.props.messages);
+    // }
 
     render() {
+        console.log(this.props.currentMessages.messages);
         return (
-            <ul onChange={this.changeHandler}>
-                {this.state.list.map(message => (
-                    <li key={message + (Math.floor(Math.random() * Math.floor(100)))}>
+            <ul>
+                {this.props.currentMessages.messages.map(message => (
+                    <li uniqueID={(Math.floor(Math.random() * Math.floor(100)))} key={message + (Math.floor(Math.random() * Math.floor(100)))}>
                         {message}
-                        <button onClick={(e) => this.deleteRow(message)}>Delete</button>
+                        {/*<button onClick={(e) => this.deleteRow(message)}>Delete</button>*/}
                     </li>
                 ))}
             </ul>
@@ -36,7 +26,8 @@ class ListArea extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        messages: state.list.messages
+        // messages: state.list.messages
+        currentMessages: state.list
     }
 }
 
