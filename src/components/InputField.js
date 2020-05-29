@@ -1,36 +1,47 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addToList} from "../actions";
-import { clearList} from "../actions";
+import ListArea from "./ListArea";
 
 class InputField extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            message: "Write a new message here!"
+            value: ""
         }
     }
-    updateMessageHandler = (event) => {
+    changeHandler = (event) => {
         if (event.target.value === "") {
             alert("You must write something!");
         } else {
-            this.setState({message: event.target.value});
+            this.setState({value: event.target.value});
         }
     }
 
-    mySubmitHandler = (event) => {
-        event.preventDefault();
-        alert("You are submitting");
+    submitHandler = (event) => {
+        if (this.state.value === "") {
+            alert("You must write something!");
+        } else {
+            event.preventDefault();
+            alert('A message was added to the list: ' + this.state.value);
+            // this.props.addToList(this.state.value);
+            this.props.messages.push(this.state.value);
+            console.log(this.props.messages);
+            // how do i re-render listarea?
+            this.setState({value: ""});
+        }
     }
 
     render() {
-        return (<div id="new-item-area">
-            <div id="myDIV" className="header">
-                <h2>My Sounding Board</h2>
-                <form id="myMessage" onSubmit={this.mySubmitHandler}>
-                    <input type="text" id="myInput" value={this.state.message} onChange={this.updateMessageHandler}></input>
-                        <span onClick={() => this.props.addToList(document.getElementById("myInput").value)} className="add-button">Add</span>
-                        <span onClick={() => this.props.clearList(document.getElementsByTagName("LI"))} className="clear-button">Clear</span>
+        return (<div currentlist={this.props.messages}>
+            <div>
+                <h1>My Sounding Board</h1>
+                <form onSubmit={this.submitHandler}>
+                    <label>
+                        New Message:
+                        <input placeholder="write something" type="text" value={this.state.value} onChange={this.changeHandler} />
+                    </label>
+                    <button type="submit">Add</button>
                 </form>
             </div>
         </div>);
@@ -39,8 +50,8 @@ class InputField extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        state: state.messageList
+        messages: state.list.messages
     }
 }
 
-export default connect(mapStateToProps, { addToList }, { clearList }) (InputField);
+export default connect(mapStateToProps, {addToList}) (InputField);

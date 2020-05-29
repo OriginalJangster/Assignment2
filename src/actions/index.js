@@ -1,7 +1,7 @@
+
 export const addToList = message => {
     return {
         type: 'ADD_TO_LIST',
-        // below here is payload data, so data you pass to the reducer to handle action
         payload: message
     };
 };
@@ -12,30 +12,44 @@ export const clearList = () => {
     };
 };
 
-export const displayList = () => {
-    return {
-        type: 'DISPLAY_LIST'
-    }
-}
+// export const setVisibilityFilter = filter => {
+//     return {
+//         type: 'SET_VISIBILITY',
+//         filter
+//     };
+// };
+//
+// export const toggleMessage = id => {
+//     return {
+//         type: 'TOGGLE_MESSAGE',
+//         id
+//     };
+// };
+//
+// export const visibilityFilters = {
+//     SHOW_ALL: 'SHOW_ALL',
+//     SHOW_COMPLETED: 'SHOW_COMPLETED',
+//     SHOW_ACTIVE: 'SHOW_ACTIVE'
+// }
 
-export const closeButton = listItem => {
-    return {
-        type: 'CLOSE_BUTTON',
-        payload: listItem
-    }
-}
-
-export const closeItem = (list, listItem) => {
-    return {
-        type: 'CLOSE_ITEM',
-        list: list,
-        listItem: listItem
-    }
-}
-
-export const addCheckMark = listItem => {
-    return {
-        type: 'ADD_CHECK_MARK',
-        payload: listItem
-    }
-}
+// export const closeButton = listItem => {
+//     return {
+//         type: 'CLOSE_BUTTON',
+//         payload: listItem
+//     }
+// }
+//
+// export const closeItem = (list, listItem) => {
+//     return {
+//         type: 'CLOSE_ITEM',
+//         list: list,
+//         listItem: listItem
+//     }
+// }
+//
+// export const addCheckMark = listItem => {
+//     return {
+//         type: 'ADD_CHECK_MARK',
+//         payload: listItem
+//     }
+// }

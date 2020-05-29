@@ -1,23 +1,43 @@
 import React from "react";
 import { connect } from "react-redux";
-import {clearList, closeItem, displayList} from "../actions";
 
 class ListArea extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            list: this.props.messages
+        }
+    }
+
+    deleteRow = (message) => {
+        let index = this.props.messages.indexOf(message);
+        this.props.messages.splice(index, 1);
+        this.setState({value: this.props.messages});
+        console.log(this.props.messages);
+    }
+
+    changeHandler = (event) => {
+        this.setState({list: this.props.messages});
+    }
+
     render() {
         return (
-            <div id="message-board-area" onLoad={() => this.props.displayList()}>
-                <ul id="myUL" onClick="closeItem(event), addCheckMark()">
-                </ul>
-                <button className="clear-list-button clear-button" onClick="clearList()">Clear List</button>
-            </div>
+            <ul onChange={this.changeHandler}>
+                {this.state.list.map(message => (
+                    <li key={message + (Math.floor(Math.random() * Math.floor(100)))}>
+                        {message}
+                        <button onClick={(e) => this.deleteRow(message)}>Delete</button>
+                    </li>
+                ))}
+            </ul>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        state: state.displayList
+        messages: state.list.messages
     }
 }
 
-export default connect(mapStateToProps, { displayList }, { closeItem }, {clearList}) (ListArea);
+export default connect(mapStateToProps) (ListArea);
