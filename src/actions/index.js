@@ -1,0 +1,56 @@
+
+export const addToList = message => {
+    return {
+        type: 'ADD_TO_LIST',
+        payload: message
+    };
+};
+
+export const deleteFromList = item => {
+    return {
+        type: 'DELETE_FROM_LIST',
+        payload: item
+    }
+}
+
+export const clearList = () => {
+    return {
+        type: 'CLEAR_LIST'
+    };
+};
+
+export const viewDetails = (item, messages) => {
+    return {
+        type: 'VIEW_DETAILS',
+        payload: item,
+        totalMessages: messages
+    }
+}
+
+export const editItem = (text, item) => {
+    return {
+        type: 'EDIT_ITEM',
+        payload: text,
+        item: item
+    }
+}
+
+// export const setVisibilityFilter = filter => {
+//     return {
+//         type: 'SET_VISIBILITY',
+//         filter
+//     };
+// };
+//
+// export const toggleMessage = id => {
+//     return {
+//         type: 'TOGGLE_MESSAGE',
+//         id
+//     };
+// };
+//
+// export const visibilityFilters = {
+//     SHOW_ALL: 'SHOW_ALL',
+//     SHOW_COMPLETED: 'SHOW_COMPLETED',
+//     SHOW_ACTIVE: 'SHOW_ACTIVE'
+// }
