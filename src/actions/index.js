@@ -6,16 +6,32 @@ export const addToList = message => {
     };
 };
 
+export const deleteFromList = item => {
+    return {
+        type: 'DELETE_FROM_LIST',
+        payload: item
+    }
+}
+
 export const clearList = () => {
     return {
         type: 'CLEAR_LIST'
     };
 };
 
-export const viewDetails = (itemID) => {
+export const viewDetails = (item, messages) => {
     return {
         type: 'VIEW_DETAILS',
-        payload: itemID
+        payload: item,
+        totalMessages: messages
+    }
+}
+
+export const editItem = (text, item) => {
+    return {
+        type: 'EDIT_ITEM',
+        payload: text,
+        item: item
     }
 }
 
@@ -37,26 +53,4 @@ export const viewDetails = (itemID) => {
 //     SHOW_ALL: 'SHOW_ALL',
 //     SHOW_COMPLETED: 'SHOW_COMPLETED',
 //     SHOW_ACTIVE: 'SHOW_ACTIVE'
-// }
-
-// export const closeButton = listItem => {
-//     return {
-//         type: 'CLOSE_BUTTON',
-//         payload: listItem
-//     }
-// }
-//
-// export const closeItem = (list, listItem) => {
-//     return {
-//         type: 'CLOSE_ITEM',
-//         list: list,
-//         listItem: listItem
-//     }
-// }
-//
-// export const addCheckMark = listItem => {
-//     return {
-//         type: 'ADD_CHECK_MARK',
-//         payload: listItem
-//     }
 // }
