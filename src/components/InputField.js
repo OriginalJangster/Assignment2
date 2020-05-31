@@ -14,9 +14,10 @@ class InputField extends React.Component {
     }
 
     submitHandler = (event) => {
-        if (this.state.value === "") {
+        if (!this.state.value.replace(/\s/g, '').length) {
             event.preventDefault();
             alert("You must write something!");
+            this.setState({value: ""});
         } else {
             event.preventDefault();
             this.props.addToList(this.state.value);
