@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import ListArea from "./ListArea";
+import ListArea from "./MessageArea";
 
 class InputField extends React.Component {
     constructor(props) {
@@ -10,11 +10,7 @@ class InputField extends React.Component {
         }
     }
     changeHandler = (event) => {
-        if (event.target.value === "") {
-            alert("You must write something!");
-        } else {
-            this.setState({value: event.target.value});
-        }
+        this.setState({value: event.target.value});
     }
 
     submitHandler = (event) => {
@@ -29,30 +25,20 @@ class InputField extends React.Component {
         }
     }
 
-    deleteItem = (item) => {
-        console.log("HI FROM DELETE");
-        this.props.deleteFromList(item);
-        console.log('AFTER REDUCER');
-        console.log(this.props.currentMessages); // not updating correctly
-    }
-
     clearField = () => {
         this.setState({value: ""});
     }
 
     render() {
-        return (<div>
+        return (<div className={"input-field"}>
             <div>
                 <form onSubmit={this.submitHandler}>
-                    <label>
-                        New Message:
-                        <input placeholder="write something" type="text" value={this.state.value} onChange={this.changeHandler} />
-                    </label>
-                    <button type="submit">Add</button>
+                    <input placeholder="New Item" type="text" value={this.state.value} onChange={this.changeHandler} />
+                    <button className={"add-button"} type="submit">Add</button>
+                    <button className={"clear-button"} onClick={() => {this.clearField()}}>Clear</button>
                 </form>
-                <button onClick={() => {this.clearField()}}>Clear</button>
             </div>
-            <ListArea todos={this.props.currentMessages} removeItem={this.deleteItem} />
+            <ListArea todos={this.props.currentMessages} />
         </div>);
     }
 }
@@ -66,8 +52,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         // dispatching plain actions
-        addToList: (message) => dispatch({ type: 'ADD_TO_LIST', payload: message }),
-        deleteFromList: (item) =>  dispatch({ type: 'DELETE_FROM_LIST', payload: item}),
+        addToList: (message) => dispatch({ type: 'ADD_TO_LIST', payload: message })
     }
 }
 

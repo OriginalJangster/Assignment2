@@ -34,23 +34,3 @@ export const editItem = (text, item) => {
         item: item
     }
 }
-
-// export const setVisibilityFilter = filter => {
-//     return {
-//         type: 'SET_VISIBILITY',
-//         filter
-//     };
-// };
-//
-// export const toggleMessage = id => {
-//     return {
-//         type: 'TOGGLE_MESSAGE',
-//         id
-//     };
-// };
-//
-// export const visibilityFilters = {
-//     SHOW_ALL: 'SHOW_ALL',
-//     SHOW_COMPLETED: 'SHOW_COMPLETED',
-//     SHOW_ACTIVE: 'SHOW_ACTIVE'
-// }
