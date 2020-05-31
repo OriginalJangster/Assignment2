@@ -1,8 +1,13 @@
+body {
+  background: darkcyan;
+}
+
 .App {
   text-align: center;
   padding: 50px;
   background-color: darkcyan;
   font-family: sans-serif;
+  width: 100%;
 }
 
 .App-header {
@@ -89,6 +94,9 @@ input:focus {
   color: paleturquoise;
 }
 
+.todolist-main .message-displayed {
+  padding-right: 5px;
+}
 
 .todolist-main {
   padding: 10px;
@@ -133,13 +141,14 @@ input:focus {
   position: absolute;
   left: 25%;
   right: 25%;
-  top: 35%;
-  bottom: 35%;
+  top: 30%;
+  bottom: 30%;
   margin: auto;
   border-radius: 20px;
   background: white;
   color: black;
   text-align: center;
+  overflow: auto;
 }
 
 .popup-inner .footer button {
@@ -168,4 +177,14 @@ input:focus {
 
 .buttons-area {
   display: inline-flex;
+}
+
+.popup-inner .top h2 {
+  padding-right: 5%;
+  padding-left: 5%;
+}
+
+.popup-inner input {
+  width: 80%;
+  padding-right: 0;
 }
