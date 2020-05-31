@@ -19,7 +19,6 @@ class InputField extends React.Component {
             alert("You must write something!");
         } else {
             event.preventDefault();
-            alert('A message was added to the list: ' + this.state.value);
             this.props.addToList(this.state.value);
             this.setState({value: ""});
         }
@@ -33,7 +32,7 @@ class InputField extends React.Component {
         return (<div className={"input-field"}>
             <div>
                 <form onSubmit={this.submitHandler}>
-                    <input placeholder="New Item" type="text" value={this.state.value} onChange={this.changeHandler} />
+                    <input placeholder="Write new message here!" type="text" value={this.state.value} onChange={this.changeHandler} />
                     <button className={"add-button"} type="submit">Add</button>
                     <button className={"clear-button"} onClick={() => {this.clearField()}}>Clear</button>
                 </form>

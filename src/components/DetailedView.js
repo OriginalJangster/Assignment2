@@ -11,7 +11,7 @@ class DetailedView extends React.Component {
     }
 
     changeHandler = (event) => {
-        if (event.target.value === "") {
+        if (!event.target.value.replace(/\s/g, '').length) {
             this.setState({value: this.props.activeMessage});
         } else {
             this.setState({value: event.target.value});
@@ -20,14 +20,15 @@ class DetailedView extends React.Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-        alert('A message was added to the list: ' + this.state.value);
-        this.updateMsg(this.state.value, this.props.activeMessage);
         this.setState({value: ""});
     }
 
     updateMsg = (text, item) => {
-        this.setState({value: this.state.value});
-        this.props.editItem(text, item);
+        if ((text !== item) && (text.replace(/\s/g, '').length)) {
+            this.setState({value: this.state.value});
+            this.props.editItem(text, item);
+        }
+        this.props.onClose();
     }
 
     render() {
@@ -48,12 +49,14 @@ class DetailedView extends React.Component {
                     <div className="footer">
                         <form onSubmit={this.submitHandler}>
                         <input defaultValue={this.props.activeMessage} onChange={this.changeHandler} />
-                        <button className={"close-details-button"} onClick={this.props.onClose}>
-                            Close
-                        </button>
-                        <button className={"save-button"} onClick={() => {this.updateMsg(this.state.value, this.props.activeMessage)}}>
-                            Save
-                        </button>
+                        <div>
+                            <button className={"close-details-button"} onClick={this.props.onClose}>
+                                Close
+                            </button>
+                            <button className={"save-button"} onClick={() => {this.updateMsg(this.state.value, this.props.activeMessage)}}>
+                                Save
+                            </button>
+                        </div>
                         </form>
                     </div>
                 </div>
