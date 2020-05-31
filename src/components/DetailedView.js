@@ -1,44 +1,60 @@
 import React from "react";
-import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
 
 class DetailedView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: ""
+        }
+    }
+
+    changeHandler = (event) => {
+        if (event.target.value === "") {
+            this.setState({value: this.props.activeMessage});
+        } else {
+            this.setState({value: event.target.value});
+        }
+    }
+
+    submitHandler = (event) => {
+        event.preventDefault();
+        alert('A message was added to the list: ' + this.state.value);
+        this.updateMsg(this.state.value, this.props.activeMessage);
+        this.setState({value: ""});
+    }
+
+    updateMsg = (text, item) => {
+        this.setState({value: this.state.value});
+        this.props.editItem(text, item);
+    }
+
     render() {
         // Render nothing if the "show" prop is false
         if(!this.props.show) {
             return null;
         }
 
-        // The gray background
-        const backdropStyle = {
-            position: 'fixed',
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            backgroundColor: 'rgba(0,0,0,0.3)',
-            padding: 50
-        };
-
-        // The modal "window"
-        const modalStyle = {
-            backgroundColor: '#fff',
-            borderRadius: 5,
-            maxWidth: 500,
-            minHeight: 300,
-            margin: '0 auto',
-            padding: 30
-        };
-
         return (
-            <div className="backdrop" style={{backdropStyle}}>
-                <div className="modal" style={{modalStyle}}>
-                    {this.props.children}
-                    {this.props.activeMessage}
+            <div className={"popup"}>
+                <div className={"popup-inner"}>
+                    <div className={"top"}>
+                        {this.props.children}
+                        <h2>{this.props.activeMessage}</h2>
+                        <hr/>
+                    </div>
+                    <h5>Edit your message here!</h5>
                     <div className="footer">
-                        <button onClick={this.props.onClose}>
+                        <form onSubmit={this.submitHandler}>
+                        <input defaultValue={this.props.activeMessage} onChange={this.changeHandler} />
+                        <button className={"close-details-button"} onClick={this.props.onClose}>
                             Close
                         </button>
+                        <button className={"save-button"} onClick={() => {this.updateMsg(this.state.value, this.props.activeMessage)}}>
+                            Save
+                        </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -54,15 +70,14 @@ DetailedView.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        activeMsg: state.item
+        currentMessages: state.list
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         // dispatching plain actions
-        editItem: (text, item) => dispatch({type: 'EDIT_ITEM', payload: text, item: item}),
-        viewDetails: (item, messages) => dispatch({type: 'VIEW_DETAILS', payload: item, totalMessages: messages})
+        editItem: (text, item) => dispatch({ type: 'EDIT_ITEM', payload: text, item: item })
     }
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import DetailedView from "./DetailedView";
-import {connect} from 'react-redux';
+import {connect} from "react-redux";
 
 class Message extends React.Component {
 
@@ -17,16 +17,24 @@ class Message extends React.Component {
 
     render() {
         return (
-            <li key={this.props.message + (Math.floor(Math.random() * Math.floor(100)))}>
-            {this.props.message}
-            <div>
-                <button onClick={() => this.props.removeItem(this.props.message)}>Delete</button>
-                <button className={"details-button"} onClick={() => this.toggleModal()}>See Details</button>
-            </div>
-            {this.state.isOpen ? <DetailedView activeMessage={this.props.message} show={this.state.isOpen} onClose={this.toggleModal}/> : null}
-        </li>
+            <li>
+                <div className={"message-displayed"}>
+                    {this.props.message}
+                </div>
+                <div className={"buttons-area"}>
+                    <button onClick={() => this.props.removeItem(this.props.message)}>Delete</button>
+                    <button className={"details-button"} onClick={() => this.toggleModal()}>See Details</button>
+                </div>
+                {this.state.isOpen ? <DetailedView messages={this.props.currentMessages} activeMessage={this.props.message} show={this.state.isOpen} onClose={this.toggleModal}/> : null}
+            </li>
         );
     }
 }
 
-export default (Message);
+const mapStateToProps = (state) => {
+    return {
+        currentMessages: state.list
+    }
+}
+
+export default connect(mapStateToProps) (Message);
