@@ -19,14 +19,6 @@ export const clearList = () => {
     };
 };
 
-export const viewDetails = (item, messages) => {
-    return {
-        type: 'VIEW_DETAILS',
-        payload: item,
-        totalMessages: messages
-    }
-}
-
 export const editItem = (text, item) => {
     return {
         type: 'EDIT_ITEM',

@@ -4,7 +4,6 @@ import { combineReducers} from "redux";
 const initMessages = {"messages": ["Write a thought", "Write a task", "Do whatever you want!", "Clear the entire list to start over",
         "Click the 'delete' button to remove the item from the board"]};
 const clearedMessages = {"messages": []};
-const initActive = initMessages.messages[0];
 
 const messageListReducer = (state = initMessages, action) => {
     switch (action.type) {
@@ -25,25 +24,16 @@ const messageListReducer = (state = initMessages, action) => {
             return remainingMessages;
         }
 
-        default:
-            return state;
-    }
-};
-
-const messageReducer = (state = initActive, action) => {
-    switch (action.type) {
-        case 'VIEW_DETAILS': {
-            let activeMessage = "";
-            for (let i = 0; i < action.totalMessages.length; i++) {
-                if (action.totalMessages[i] === action.payload)
-                activeMessage = action.payload;
-            }
-            return activeMessage;
-        }
-
         case 'EDIT_ITEM': {
-            let updatedItem = action.item + " " + action.payload;
-            return updatedItem;
+            let index = 0;
+            for (let i = 0; i < state.messages.length; i++) {
+                if (state.messages[i] === action.item)
+                    index = i;
+            }
+            let editedMessages = {...state};
+            editedMessages.messages[index] = action.payload;
+            console.log(editedMessages.messages);
+            return editedMessages;
         }
 
         default:
@@ -53,6 +43,5 @@ const messageReducer = (state = initActive, action) => {
 
 // don't need to combine reducer if only 1 reducer
 export default combineReducers({
-    list: messageListReducer,
-    item: messageReducer
+    list: messageListReducer
 });

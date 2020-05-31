@@ -13,7 +13,8 @@ class MessageArea extends React.Component {
             <div className={"todolist-main"}>
                 <ul>
                     {this.props.todos.messages.map(message => (
-                        <Message message={message} removeItem={this.deleteItem} />
+                        <Message key={message + (Math.floor(Math.random() * Math.floor(100)))}
+                            message={message} removeItem={this.deleteItem} />
                         ))}
                 </ul>
                 <button className={"clear-all-button"} onClick={this.props.clearList} >Clear List</button>
