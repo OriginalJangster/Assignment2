@@ -32,7 +32,7 @@ class DetailedView extends React.Component {
         this.props.onClose();
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         document.addEventListener('mousedown', this.handleClick, false);
     }
 
