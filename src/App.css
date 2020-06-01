@@ -1,8 +1,13 @@
+body {
+  background: darkcyan;
+}
+
 .App {
   text-align: center;
   padding: 50px;
   background-color: darkcyan;
   font-family: sans-serif;
+  width: 100%;
 }
 
 .App-header {
@@ -13,6 +18,11 @@
   color: black;
   display: flex;
   justify-content: center;
+}
+
+img {
+  border-radius: 200px;
+  margin-bottom: 45px;
 }
 
 h1 {
@@ -89,6 +99,9 @@ input:focus {
   color: paleturquoise;
 }
 
+.todolist-main .message-displayed {
+  padding-right: 5px;
+}
 
 .todolist-main {
   padding: 10px;
@@ -133,19 +146,25 @@ input:focus {
   position: absolute;
   left: 25%;
   right: 25%;
-  top: 35%;
-  bottom: 35%;
+  top: 30%;
+  bottom: 30%;
   margin: auto;
-  border-radius: 20px;
-  background: white;
+  border-radius: 30px;
+  background: #FFE9EC;
   color: black;
   text-align: center;
+  overflow: auto;
 }
 
 .popup-inner .footer button {
   right: 0;
   bottom: 0;
   margin: 15px;
+}
+
+.popup-inner .footer button:hover {
+  background-color: #02798F;
+  color: #FFCD5D;
 }
 
 .popup-inner .footer .close-details-button {
@@ -156,16 +175,29 @@ input:focus {
   color: palegreen;
 }
 
-.popup-inner button:hover {
-  background-color: #02798F;
-  color: #FFCD5D;
-}
-
 .popup-inner hr {
-  background-color: #04A1BF;
+  background-color: #ffbbc8;
   height: 0.5px;
+  border: none;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .buttons-area {
   display: inline-flex;
+}
+
+.popup-inner input {
+  width: 80%;
+  padding-right: 0;
+}
+
+.popup-inner input:focus {
+  outline: none;
+  border-color: #ffbbc8;
+  box-shadow: 0 0 5px navajowhite;
+}
+
+.popup-inner .footer h5 {
+  color: lightcoral;
 }

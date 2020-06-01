@@ -11,7 +11,7 @@ class DetailedView extends React.Component {
     }
 
     changeHandler = (event) => {
-        if (event.target.value === "") {
+        if (!event.target.value.replace(/\s/g, '').length) {
             this.setState({value: this.props.activeMessage});
         } else {
             this.setState({value: event.target.value});
@@ -20,14 +20,32 @@ class DetailedView extends React.Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-        alert('A message was added to the list: ' + this.state.value);
         this.updateMsg(this.state.value, this.props.activeMessage);
         this.setState({value: ""});
     }
 
     updateMsg = (text, item) => {
-        this.setState({value: this.state.value});
-        this.props.editItem(text, item);
+        if ((text !== item) && (text.replace(/\s/g, '').length)) {
+            this.setState({value: this.state.value});
+            this.props.editItem(text, item);
+        }
+        this.props.onClose();
+    }
+
+    componentWillMount() {
+        document.addEventListener('mousedown', this.handleClick, false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClick, false);
+    }
+
+    handleClick = (event) => {
+        if (this.node.contains(event.target)) {
+            // do nothing
+        } else {
+            this.props.onClose();
+        }
     }
 
     render() {
@@ -38,22 +56,24 @@ class DetailedView extends React.Component {
 
         return (
             <div className={"popup"}>
-                <div className={"popup-inner"}>
+                <div ref={node => this.node = node} className={"popup-inner"}>
                     <div className={"top"}>
                         {this.props.children}
                         <h2>{this.props.activeMessage}</h2>
-                        <hr/>
                     </div>
-                    <h5>Edit your message here!</h5>
                     <div className="footer">
+                        <hr/>
+                        <h5>Edit your message here!</h5>
                         <form onSubmit={this.submitHandler}>
                         <input defaultValue={this.props.activeMessage} onChange={this.changeHandler} />
-                        <button className={"close-details-button"} onClick={this.props.onClose}>
-                            Close
-                        </button>
-                        <button className={"save-button"} onClick={() => {this.updateMsg(this.state.value, this.props.activeMessage)}}>
-                            Save
-                        </button>
+                        <div>
+                            <button type={"submit"} className={"save-button"}>
+                                Save
+                            </button>
+                            <button className={"close-details-button"} onClick={this.props.onClose}>
+                                Close
+                            </button>
+                        </div>
                         </form>
                     </div>
                 </div>
