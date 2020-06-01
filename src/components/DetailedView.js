@@ -20,6 +20,7 @@ class DetailedView extends React.Component {
 
     submitHandler = (event) => {
         event.preventDefault();
+        this.updateMsg(this.state.value, this.props.activeMessage);
         this.setState({value: ""});
     }
 
@@ -31,6 +32,22 @@ class DetailedView extends React.Component {
         this.props.onClose();
     }
 
+    componentWillMount() {
+        document.addEventListener('mousedown', this.handleClick, false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClick, false);
+    }
+
+    handleClick = (event) => {
+        if (this.node.contains(event.target)) {
+            // do nothing
+        } else {
+            this.props.onClose();
+        }
+    }
+
     render() {
         // Render nothing if the "show" prop is false
         if(!this.props.show) {
@@ -39,7 +56,7 @@ class DetailedView extends React.Component {
 
         return (
             <div className={"popup"}>
-                <div className={"popup-inner"}>
+                <div ref={node => this.node = node} className={"popup-inner"}>
                     <div className={"top"}>
                         {this.props.children}
                         <h2>{this.props.activeMessage}</h2>
@@ -50,11 +67,11 @@ class DetailedView extends React.Component {
                         <form onSubmit={this.submitHandler}>
                         <input defaultValue={this.props.activeMessage} onChange={this.changeHandler} />
                         <div>
+                            <button type={"submit"} className={"save-button"}>
+                                Save
+                            </button>
                             <button className={"close-details-button"} onClick={this.props.onClose}>
                                 Close
-                            </button>
-                            <button className={"save-button"} onClick={() => {this.updateMsg(this.state.value, this.props.activeMessage)}}>
-                                Save
                             </button>
                         </div>
                         </form>
