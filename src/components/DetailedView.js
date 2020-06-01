@@ -60,10 +60,10 @@ class DetailedView extends React.Component {
                     <div className={"top"}>
                         {this.props.children}
                         <h2>{this.props.activeMessage}</h2>
-                        <hr/>
                     </div>
-                    <h5>Edit your message here!</h5>
                     <div className="footer">
+                        <hr/>
+                        <h5>Edit your message here!</h5>
                         <form onSubmit={this.submitHandler}>
                         <input defaultValue={this.props.activeMessage} onChange={this.changeHandler} />
                         <div>

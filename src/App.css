@@ -20,6 +20,11 @@ body {
   justify-content: center;
 }
 
+img {
+  border-radius: 200px;
+  margin-bottom: 45px;
+}
+
 h1 {
   font-size: 55px;
   font-weight: 900;
@@ -144,8 +149,8 @@ input:focus {
   top: 30%;
   bottom: 30%;
   margin: auto;
-  border-radius: 20px;
-  background: white;
+  border-radius: 30px;
+  background: #FFE9EC;
   color: black;
   text-align: center;
   overflow: auto;
@@ -157,6 +162,11 @@ input:focus {
   margin: 15px;
 }
 
+.popup-inner .footer button:hover {
+  background-color: #02798F;
+  color: #FFCD5D;
+}
+
 .popup-inner .footer .close-details-button {
   color: tomato;
 }
@@ -165,26 +175,29 @@ input:focus {
   color: palegreen;
 }
 
-.popup-inner button:hover {
-  background-color: #02798F;
-  color: #FFCD5D;
-}
-
 .popup-inner hr {
-  background-color: #04A1BF;
+  background-color: #ffbbc8;
   height: 0.5px;
+  border: none;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .buttons-area {
   display: inline-flex;
 }
 
-.popup-inner .top h2 {
-  padding-right: 5%;
-  padding-left: 5%;
-}
-
 .popup-inner input {
   width: 80%;
   padding-right: 0;
+}
+
+.popup-inner input:focus {
+  outline: none;
+  border-color: #ffbbc8;
+  box-shadow: 0 0 5px navajowhite;
+}
+
+.popup-inner .footer h5 {
+  color: lightcoral;
 }
