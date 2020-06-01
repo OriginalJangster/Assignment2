@@ -38,6 +38,11 @@ const messageListReducer = (state = initMessages, action) => {
         case 'EDIT_ITEM': {
             let index = 0;
             for (let i = 0; i < state.messages.length; i++) {
+                if (state.messages.includes(action.payload)) {
+                    alert('You already have this message!');
+                    console.log(state.messages);
+                    return state;
+                }
                 if (state.messages[i] === action.item)
                     index = i;
             }
