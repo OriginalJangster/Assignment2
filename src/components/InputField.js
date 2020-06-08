@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import ListArea from "./MessageArea";
+import MessageArea from "./MessageArea";
 
 class InputField extends React.Component {
     constructor(props) {
@@ -38,7 +38,7 @@ class InputField extends React.Component {
                     <button className={"clear-button"} onClick={() => {this.clearField()}}>Clear</button>
                 </form>
             </div>
-            <ListArea todos={this.props.currentMessages} />
+            <MessageArea todos={this.props.currentMessages} />
         </div>);
     }
 }
