@@ -146,8 +146,8 @@ input:focus {
   position: absolute;
   left: 25%;
   right: 25%;
-  top: 30%;
-  bottom: 30%;
+  top: 25%;
+  bottom: 25%;
   margin: auto;
   border-radius: 30px;
   background: #FFE9EC;
