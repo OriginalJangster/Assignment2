@@ -65,15 +65,19 @@ class DetailedView extends React.Component {
                         <hr/>
                         <h5>Edit your message here!</h5>
                         <form onSubmit={this.submitHandler}>
-                        <input defaultValue={this.props.activeMessage} onChange={this.changeHandler} />
-                        <div>
-                            <button type={"submit"} className={"save-button"}>
-                                Save
-                            </button>
-                            <button className={"close-details-button"} onClick={this.props.onClose}>
-                                Close
-                            </button>
-                        </div>
+                            <input defaultValue={this.props.activeMessage} onChange={this.changeHandler} />
+                            <h6 className={"time-details"}>
+                                <span className={"created-at"}>Created at: </span>
+                                <span className={"updated-at"}>Updated at: </span>
+                            </h6>
+                            <div>
+                                <button type={"submit"} className={"save-button"}>
+                                    Save
+                                </button>
+                                <button className={"close-details-button"} onClick={this.props.onClose}>
+                                    Close
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

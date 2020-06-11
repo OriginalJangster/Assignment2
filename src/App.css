@@ -201,3 +201,20 @@ input:focus {
 .popup-inner .footer h5 {
   color: lightcoral;
 }
+
+.popup-inner .time-details {
+  color: lightcoral;
+  text-align: right;
+  position: relative;
+  margin-left: 4em;
+  margin-right: 4em;
+}
+
+.popup-inner .time-details .updated-at {
+  text-align: right;
+}
+
+.popup-inner .time-details .created-at {
+  left: 0;
+  position: absolute;
+}

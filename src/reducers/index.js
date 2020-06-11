@@ -2,7 +2,7 @@ import { combineReducers} from "redux";
 
 // one state so one reducer only ( 1 reducer / state)
 const initMessages = {"messages": ["Write a thought", "Write a task", "Do whatever you want!", "Clear the entire list to start over",
-        "Click the 'delete' button to remove the item from the board"]};
+        "Click the 'delete' button to remove the item from the board", "Click the 'see details' button to edit your message!"]};
 const clearedMessages = {"messages": []};
 
 const messageListReducer = (state = initMessages, action) => {
