@@ -10,6 +10,28 @@ class DetailedView extends React.Component {
         }
     }
 
+    // temporary method until dates retrieved from backend
+    getDate = () => {
+        let today = new Date();
+        let dd = String(today.getDate() - 1).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        return today;
+    }
+
+    // temporary method until dates retrieved from backend
+    getUpdatedDate = () => {
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        return today;
+    }
+
     changeHandler = (event) => {
         if (!event.target.value.replace(/\s/g, '').length) {
             this.setState({value: this.props.activeMessage});
@@ -67,8 +89,8 @@ class DetailedView extends React.Component {
                         <form onSubmit={this.submitHandler}>
                             <input defaultValue={this.props.activeMessage} onChange={this.changeHandler} />
                             <h6 className={"time-details"}>
-                                <span className={"created-at"}>Created at: </span>
-                                <span className={"updated-at"}>Updated at: </span>
+                                <span className={"created-at"}>Created at: {this.getDate()} </span>
+                                <span className={"updated-at"}>Updated at: {this.getUpdatedDate()}</span>
                             </h6>
                             <div>
                                 <button type={"submit"} className={"save-button"}>
