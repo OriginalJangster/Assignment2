@@ -146,8 +146,8 @@ input:focus {
   position: absolute;
   left: 25%;
   right: 25%;
-  top: 30%;
-  bottom: 30%;
+  top: 25%;
+  bottom: 25%;
   margin: auto;
   border-radius: 30px;
   background: #FFE9EC;
@@ -200,4 +200,21 @@ input:focus {
 
 .popup-inner .footer h5 {
   color: lightcoral;
+}
+
+.popup-inner .time-details {
+  color: lightcoral;
+  text-align: right;
+  position: relative;
+  margin-left: 4em;
+  margin-right: 4em;
+}
+
+.popup-inner .time-details .updated-at {
+  text-align: right;
+}
+
+.popup-inner .time-details .created-at {
+  left: 0;
+  position: absolute;
 }
