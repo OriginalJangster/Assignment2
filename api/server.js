@@ -16,16 +16,16 @@ const port = process.env.PORT || 5000;
 server.listen(port);
 
 // Connect to MongoDB
-// huh???
-const mongoDB = "mongodb+srv://sandbox-776eb.mongodb.net/messages";
-mongoose.connect(mongoDB, { useNewUrlParser: true});
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/messages',  { useNewUrlParser: true });
-mongoose.Promise = global.Promise; // ?
+// const mongoDB = "mongodb+srv://m001-student:Password123!@sandbox-776eb.mongodb.net/messages?retryWrites=true&w=majority";
+const mongoDB = "mongodb+srv://admin123:Password1234@sandbox-776eb.mongodb.net/messages?retryWrites=true&w=majority";
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Get the default connection
 const db = mongoose.connection;
+
 // Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.on('connected', () => {   console.log("mongoose is connected"); });
 
 // view engine setup
 server.set('views', path.join(__dirname, 'views'));
@@ -39,7 +39,7 @@ server.use(cookieParser());
 server.use(express.static(path.join(__dirname, 'public')));
 server.use(bodyParser.json());
 
-server.use('/api', indexRouter);
+server.use('/routes', indexRouter);
 
 // catch 404 and forward to error handler
 server.use(function(req, res, next) {

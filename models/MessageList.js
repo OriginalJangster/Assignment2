@@ -8,13 +8,14 @@ const MessageListSchema = new Schema({
         type: String,
         required: [true, 'Message content is required']
     },
+    // timestamps: true
     timestamps: {
         type: Date,
         createdAt: 'created_at',
         updatedAt: 'updated_at',
         required: [true, 'Timestamp is required']
     }
-})
+});
 
 const MessageList = mongoose.model('MessageList', MessageListSchema);
 
