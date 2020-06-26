@@ -8,6 +8,12 @@ class MessageArea extends React.Component {
         this.props.deleteFromList(item);
     }
 
+    componentDidMount() {
+        fetch('/api/messages')
+            .then(res => res.json())
+            .then(messages => this.props.currentMessages = messages);
+    }
+
     render() {
         return (
             <div className={"todolist-main"}>
