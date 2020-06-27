@@ -2,39 +2,73 @@ const express = require("express");
 const router = express.Router();
 const MessageList = require('../../models/MessageList');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
 // Get a list of messages
-router.get("/messages", function(req, res, next) {
-  MessageList.find({}).then((messages) => {
-    res.send(messages);
-  })
+router.get("/allMsg", async (req, res) => {
+  try {
+    const messages = await MessageList.find();
+    res.json(messages);
+  } catch(err) {
+    res.status(400).json('Error: ' + err);
+  }
 });
 
 // Add a new message to the database
-router.post('/messages', (req, res, next) => {
-  MessageList.create(req.body).then((message) => {
-    res.send(message);
-  }).catch(next);
+router.post('/addMsg', async (req, res) => {
+  const messages = new MessageList({
+    message: req.body.message,
+    timestamps: req.body.timestamps
+  });
+
+  try {
+    const savedMessage = await messages.save();
+    res.json(savedMessage);
+  } catch(err) {
+    res.status(400).json('Error: ' + err);
+  }
 });
 
-// Update a message in the database
-router.put('/messages/:id', (req, res, next) => {
-  MessageList.findByIdAndUpdate({_id: req.params.id}).then(() => {
-    MessageList.findOne({_id: req.params.id}).then((message) => {
-      res.send(message)
-    })
-  })
+// get a specific post
+router.get('/specificMsg/:messageId', async (req, res) => {
+  try {
+    const message = await MessageList.findById(req.params.messageId);
+    res.json(message);
+  } catch(err) {
+    res.status(400).json('Error: ' + err);
+  }
 });
 
 // Delete a message in the database
-router.delete('/messages/:id', (req, res, next) => {
-  MessageList.findByIdAndDelete({_id: req.params.id}).then((message) => {
-    res.send(message)
-  })
+router.delete('/deleteMsg/:messageId', async (req, res,) => {
+  try {
+    const removedMessage = await MessageList.remove({_id: req.params.messageId});
+    res.json(removedMessage);
+  } catch(err) {
+    res.status(400).json('Error: ' + err);
+  }
 });
+
+// Update a message in the database
+router.patch('/editMsg/:messageId', async (req, res) => {
+  try {
+    const editedMessage = await MessageList.updateOne(
+        {_id: req.params.messageId},
+        {$set: {message: req.body.message}}
+        );
+    res.json(editedMessage);
+  } catch(err) {
+      res.status(400).json('Error: ' + err);
+  }
+});
+
+// delete all messages (clears list)
+router.delete('/deleteAll', async (req, res) => {
+  try {
+    const clearedMessages = await MessageList.deleteMany({});
+    res.json(clearedMessages);
+  } catch(err) {
+    res.status(400).json('Error: ' + err);
+  }
+})
+
 
 module.exports = router;

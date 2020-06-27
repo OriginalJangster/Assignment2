@@ -7,16 +7,11 @@ const MessageListSchema = new Schema({
     message: {
         type: String,
         required: [true, 'Message content is required']
-    },
-    // timestamps: true
-    timestamps: {
-        type: Date,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at',
-        required: [true, 'Timestamp is required']
-    }
+    }},  {
+    timestamps: true
 });
 
+// Note: Mongoose transforms name of collection to lowercase + adds plural "s" at end
 const MessageList = mongoose.model('MessageList', MessageListSchema);
 
 module.exports = MessageList;
