@@ -31,7 +31,8 @@ export const deleteFromList = (id) => dispatch => {
         .delete(`http://localhost:5000/routes/deleteMsg/${id}`)
         .then(res => dispatch({
             type: 'DELETE_FROM_LIST',
-            payload: res.data
+            payload: res.data,
+            id: id
         }))
         .catch(err =>
             dispatch(returnErrors(err.response.data, err.response.status))
@@ -56,7 +57,7 @@ export const editItem = (text, id) => dispatch => {
         .patch(`http://localhost:5000/routes/editMsg/${id}`, req)
         .then(res => dispatch({
             type: 'EDIT_ITEM',
-            payload: res.data,
+            payload: text,
             id: id
         }))
         .catch(err =>

@@ -10,14 +10,14 @@ class MessageArea extends React.Component {
 
     deleteItem = (id) => {
         this.props.deleteFromList(id);
-        window.location.reload();
     };
 
     render() {
         if (this.props.loading) {
-            return (<div className="lds-ripple">
-                <div></div>
-                <div></div>
+            return (<div className="spinner">
+                <div className="bounce1"></div>
+                <div className="bounce2"></div>
+                <div className="bounce3"></div>
             </div>)
         }
         return (
@@ -29,7 +29,6 @@ class MessageArea extends React.Component {
                 </ul>
                 <button className={"clear-all-button"} onClick={() => {
                     this.props.clearList();
-                    window.location.reload();
                 }} >Clear List</button>
             </div>
         );

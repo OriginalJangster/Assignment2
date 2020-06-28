@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {editItem, getMessages} from "../actions";
+import {editItem} from "../actions";
 
 class DetailedView extends React.Component {
     constructor(props) {
@@ -23,7 +23,6 @@ class DetailedView extends React.Component {
         event.preventDefault();
         this.updateMsg(this.state.value, this.props.activeMsg._id);
         this.setState({value: ""});
-        window.location.reload();
     };
 
     updateMsg = (text, id) => {
@@ -101,8 +100,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    editItem,
-    getMessages
+    editItem
 };
 
 export default connect(mapStateToProps, mapDispatchToProps) (DetailedView);
