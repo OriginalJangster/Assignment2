@@ -23,7 +23,7 @@ class DetailedView extends React.Component {
         event.preventDefault();
         this.updateMsg(this.state.value, this.props.activeMsg._id);
         this.setState({value: ""});
-        this.props.getMessages();
+        window.location.reload();
     };
 
     updateMsg = (text, id) => {
