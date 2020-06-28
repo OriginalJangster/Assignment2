@@ -14,9 +14,10 @@ class MessageArea extends React.Component {
 
     render() {
         if (this.props.loading) {
-            return (<div className="lds-ripple">
-                <div></div>
-                <div></div>
+            return (<div className="spinner">
+                <div className="bounce1"></div>
+                <div className="bounce2"></div>
+                <div className="bounce3"></div>
             </div>)
         }
         return (
