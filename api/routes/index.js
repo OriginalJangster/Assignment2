@@ -26,16 +26,6 @@ router.post('/addMsg', async (req, res) => {
   }
 });
 
-// get a specific post
-router.get('/specificMsg/:messageId', async (req, res) => {
-  try {
-    const message = await MessageList.findById(req.params.messageId);
-    res.json(message);
-  } catch(err) {
-    res.status(400).json('Error: ' + err);
-  }
-});
-
 // Delete a message in the database
 router.delete('/deleteMsg/:messageId', async (req, res) => {
   try {
@@ -67,7 +57,7 @@ router.delete('/deleteAll', async (req, res) => {
   } catch(err) {
     res.status(400).json('Error: ' + err);
   }
-})
+});
 
 
 module.exports = router;

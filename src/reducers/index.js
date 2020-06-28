@@ -4,7 +4,7 @@ import { combineReducers} from "redux";
 const initMessages = {
     messages: [],
     loading: false
-}
+};
 
 const messageListReducer = (state = initMessages, action) => {
     switch (action.type) {
@@ -15,31 +15,24 @@ const messageListReducer = (state = initMessages, action) => {
                 loading: false
             };
         case 'ADD_TO_LIST': {
-            if (state.messages.includes(action.payload.message)) {
-                alert('You already have this message!');
-                console.log(state.messages);
-                return state;
-            } else {
-                return {...state, messages: [action.payload, ...state.messages]}
-            }
+            return {...state, messages: [action.payload, ...state.messages]}
         }
         case 'CLEAR_LIST': {
-            return {...state, messages: [action.payload]};
+            return {...state, messages: []};
         }
         case 'DELETE_FROM_LIST': {
-            console.log(action.payload);
-            return {...state, messages: [state.messages.filter(el => el._id !== action.payload._id)]};
+            let prevMessages = [...state.messages];
+            let remainingMessages = prevMessages.filter(el => el._id !== action.id);
+            return  {...state, messages: remainingMessages};
         }
         case 'EDIT_ITEM': {
-            for (let i = 0; i < state.messages.length; i++) {
-                if (state.messages.includes(action.payload.message)) {
-                    alert('You already have this message!');
-                    return state;
+            let edited = {...state, messages: [...state.messages]};
+            edited.messages.forEach(msg => {
+                if (msg._id === action.id) {
+                    msg.message = action.payload;
                 }
-            }
-            return {...state, messages: [
-                (state.messages.find(el => el._id === action.id).message = action.payload.message),
-                    ...state.messages]};
+            });
+            return edited;
         }
         case 'MESSAGES_LOADING':
             return {
