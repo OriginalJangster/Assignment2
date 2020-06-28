@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
+import {editItem, getMessages} from "../actions";
 
 class DetailedView extends React.Component {
     constructor(props) {
@@ -10,49 +11,28 @@ class DetailedView extends React.Component {
         }
     }
 
-    // temporary method until dates retrieved from backend
-    getDate = () => {
-        let today = new Date();
-        let dd = String(today.getDate() - 1).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        let yyyy = today.getFullYear();
-
-        today = mm + '/' + dd + '/' + yyyy;
-        return today;
-    }
-
-    // temporary method until dates retrieved from backend
-    getUpdatedDate = () => {
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        let yyyy = today.getFullYear();
-
-        today = mm + '/' + dd + '/' + yyyy;
-        return today;
-    }
-
     changeHandler = (event) => {
         if (!event.target.value.replace(/\s/g, '').length) {
-            this.setState({value: this.props.activeMessage});
+            this.setState({value: this.props.activeMsg.message});
         } else {
             this.setState({value: event.target.value});
         }
-    }
+    };
 
     submitHandler = (event) => {
         event.preventDefault();
-        this.updateMsg(this.state.value, this.props.activeMessage);
+        this.updateMsg(this.state.value, this.props.activeMsg._id);
         this.setState({value: ""});
-    }
+        this.props.getMessages();
+    };
 
-    updateMsg = (text, item) => {
-        if ((text !== item) && (text.replace(/\s/g, '').length)) {
+    updateMsg = (text, id) => {
+        if ((text !== this.props.activeMsg._id) && (text.replace(/\s/g, '').length)) {
             this.setState({value: this.state.value});
-            this.props.editItem(text, item);
+            this.props.editItem(text, id);
         }
         this.props.onClose();
-    }
+    };
 
     UNSAFE_componentWillMount() {
         document.addEventListener('mousedown', this.handleClick, false);
@@ -68,7 +48,7 @@ class DetailedView extends React.Component {
         } else {
             this.props.onClose();
         }
-    }
+    };
 
     render() {
         // Render nothing if the "show" prop is false
@@ -81,16 +61,16 @@ class DetailedView extends React.Component {
                 <div ref={node => this.node = node} className={"popup-inner"}>
                     <div className={"top"}>
                         {this.props.children}
-                        <h2>{this.props.activeMessage}</h2>
+                        <h2>{this.props.activeMsg.message}</h2>
                     </div>
                     <div className="footer">
                         <hr/>
                         <h5>Edit your message here!</h5>
                         <form onSubmit={this.submitHandler}>
-                            <input defaultValue={this.props.activeMessage} onChange={this.changeHandler} />
+                            <input defaultValue={this.props.activeMsg.message} onChange={this.changeHandler} />
                             <h6 className={"time-details"}>
-                                <span className={"created-at"}>Created at: {this.getDate()} </span>
-                                <span className={"updated-at"}>Updated at: {this.getUpdatedDate()}</span>
+                                <span className={"created-at"}>Created at: {this.props.activeMsg.createdAt} </span>
+                                <span className={"updated-at"}>Updated at: {this.props.activeMsg.updatedAt}</span>
                             </h6>
                             <div>
                                 <button type={"submit"} className={"save-button"}>
@@ -112,19 +92,17 @@ DetailedView.propTypes = {
     onClose: PropTypes.func.isRequired,
     show: PropTypes.bool,
     children: PropTypes.node
-}
+};
 
 const mapStateToProps = (state) => {
     return {
-        currentMessages: state.list
+        currentMessages: state.list.messages
     }
-}
+};
 
-const mapDispatchToProps = dispatch => {
-    return {
-        // dispatching plain actions
-        editItem: (text, item) => dispatch({ type: 'EDIT_ITEM', payload: text, item: item })
-    }
-}
+const mapDispatchToProps = {
+    editItem,
+    getMessages
+};
 
 export default connect(mapStateToProps, mapDispatchToProps) (DetailedView);

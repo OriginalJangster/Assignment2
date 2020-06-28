@@ -1,20 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
 import Message from "./Message";
+import {clearList, deleteFromList, getMessages} from "../actions";
 
 class MessageArea extends React.Component {
 
-    deleteItem = (item) => {
-        this.props.deleteFromList(item);
-    }
+    componentDidMount() {
+        this.props.getMessages();
+    };
+
+    deleteItem = (id) => {
+        this.props.deleteFromList(id);
+    };
 
     render() {
+        if (this.props.loading) {
+            return <div>Loading</div>
+        }
         return (
             <div className={"todolist-main"}>
                 <ul>
-                    {this.props.todos.messages.map(message => (
-                        <Message key={message + (Math.floor(Math.random() * Math.floor(100)))}
-                            message={message} removeItem={this.deleteItem} />
+                    {this.props.currentMessages.map(message => (
+                        <Message key={Math.random()} obj={message} removeMsg={this.deleteItem}/>
                         ))}
                 </ul>
                 <button className={"clear-all-button"} onClick={this.props.clearList} >Clear List</button>
@@ -25,15 +32,15 @@ class MessageArea extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        currentMessages: state.list
+        currentMessages: state.list.messages,
+        loading: state.list.loading
     }
-}
+};
 
-const mapDispatchToProps = dispatch => {
-    return {
-        clearList: () => dispatch({ type: 'CLEAR_LIST'}),
-        deleteFromList: (item) =>  dispatch({ type: 'DELETE_FROM_LIST', payload: item})
-    }
-}
+const mapDispatchToProps = {
+    clearList,
+    deleteFromList,
+    getMessages
+};
 
 export default connect(mapStateToProps, mapDispatchToProps) (MessageArea);

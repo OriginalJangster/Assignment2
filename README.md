@@ -12,7 +12,7 @@ For the second assignment, you’ll be essentially re-creating your assignment 1
 
 We’re expecting the following:
 
-1)	You MUST use React AND Redux, and start your assignment with the create-react-app boilerplate code. Remember, you will be asked to explain sections of your code.
+1)	You MUST use React AND Redux, and start your assignment with the create-react-server boilerplate code. Remember, you will be asked to explain sections of your code.
 
 2)	Some kind of text input or textarea, to write out a message, as well as a button to add the message to a list. (A button to clear the form is optional.)
 
@@ -30,7 +30,7 @@ For example:
 -	you could have additional form elements that show up in the messages (e.g. a text input for name, a dropdown that includes different options, etc.)
 -	A toggle for each list item that does something!
 
-NOTE FOR IMPLEMENTATION: DO NOT try to take your assignment 1 code, and re-shape it into React components. Instead, start with create-react-app, and think about how you would organize your component structure. Begin to create those components, and then copy over pieces of your assignment 1 code as needed. Remember that handling actions and rendering the view is handled much differently in React+Redux. If you find yourself needing to use HTML DOM functions (e.g. document.getElementById),then STOP, and try to think of the “React” way to do the same thing.
+NOTE FOR IMPLEMENTATION: DO NOT try to take your assignment 1 code, and re-shape it into React components. Instead, start with create-react-server, and think about how you would organize your component structure. Begin to create those components, and then copy over pieces of your assignment 1 code as needed. Remember that handling actions and rendering the view is handled much differently in React+Redux. If you find yourself needing to use HTML DOM functions (e.g. document.getElementById),then STOP, and try to think of the “React” way to do the same thing.
 
 As described in the individual assignment rubric, your code will need to meet these requirements and be functional, up to perhaps a few minor glitches in tricky cases. Note that functionality includes both user-visible and console-visible issues.
 

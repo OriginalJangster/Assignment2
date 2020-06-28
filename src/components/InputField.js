@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import MessageArea from "./MessageArea";
+import {addToList} from "../actions";
 
 class InputField extends React.Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class InputField extends React.Component {
     }
     changeHandler = (event) => {
         this.setState({value: event.target.value});
-    }
+    };
 
     submitHandler = (event) => {
         if (!this.state.value.replace(/\s/g, '').length) {
@@ -23,11 +24,11 @@ class InputField extends React.Component {
             this.props.addToList(this.state.value);
             this.setState({value: ""});
         }
-    }
+    };
 
     clearField = () => {
         this.setState({value: ""});
-    }
+    };
 
     render() {
         return (<div className={"input-field"}>
@@ -38,22 +39,19 @@ class InputField extends React.Component {
                     <button className={"clear-button"} onClick={() => {this.clearField()}}>Clear</button>
                 </form>
             </div>
-            <MessageArea todos={this.props.currentMessages} />
+            <MessageArea/>
         </div>);
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        currentMessages: state.list
+        currentMessages: state.list.messages
     }
-}
+};
 
-const mapDispatchToProps = dispatch => {
-    return {
-        // dispatching plain actions
-        addToList: (message) => dispatch({ type: 'ADD_TO_LIST', payload: message })
-    }
-}
+const mapDispatchToProps =  {
+    addToList
+};
 
 export default connect(mapStateToProps, mapDispatchToProps) (InputField);
