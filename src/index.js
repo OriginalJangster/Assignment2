@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from "./App";
 import * as serviceWorker from './serviceWorker';
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import reducers from './reducers';
+import thunk from "redux-thunk";
 
 // STORE -> GLOBALIZED STATE
 // let store = createStore(counter);
@@ -42,8 +43,13 @@ import reducers from './reducers';
 // DISPATCH (an action)
 // store.dispatch(increment());
 
+const initialState = {};
+
 ReactDOM.render(
-  <Provider store={createStore(reducers)}>
+  <Provider store={createStore(
+      reducers,
+      initialState,
+      applyMiddleware(thunk))}>
       <App />
   </Provider>,
   document.getElementById('root')

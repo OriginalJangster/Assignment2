@@ -13,19 +13,19 @@ class Message extends React.Component {
 
     toggleModal = () => {
         this.setState({isOpen: !this.state.isOpen});
-    }
+    };
 
     render() {
         return (
             <li>
                 <div className={"message-displayed"}>
-                    {this.props.message}
+                    {this.props.obj.message}
                 </div>
                 <div className={"buttons-area"}>
-                    <button onClick={() => this.props.removeItem(this.props.message)}>Delete</button>
+                    <button onClick={() => this.props.removeMsg(this.props.obj._id)}>Delete</button>
                     <button className={"details-button"} onClick={() => this.toggleModal()}>See Details</button>
                 </div>
-                {this.state.isOpen ? <DetailedView messages={this.props.currentMessages} activeMessage={this.props.message} show={this.state.isOpen} onClose={this.toggleModal}/> : null}
+                {this.state.isOpen ? <DetailedView activeMsg={this.props.obj} show={this.state.isOpen} onClose={this.toggleModal}/> : null}
             </li>
         );
     }
@@ -33,8 +33,8 @@ class Message extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        currentMessages: state.list
+        currentMessages: state.list.messages
     }
-}
+};
 
 export default connect(mapStateToProps) (Message);

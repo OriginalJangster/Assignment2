@@ -15,8 +15,7 @@ router.get("/allMsg", async (req, res) => {
 // Add a new message to the database
 router.post('/addMsg', async (req, res) => {
   const messages = new MessageList({
-    message: req.body.message,
-    timestamps: req.body.timestamps
+    message: req.body.message
   });
 
   try {
@@ -38,7 +37,7 @@ router.get('/specificMsg/:messageId', async (req, res) => {
 });
 
 // Delete a message in the database
-router.delete('/deleteMsg/:messageId', async (req, res,) => {
+router.delete('/deleteMsg/:messageId', async (req, res) => {
   try {
     const removedMessage = await MessageList.remove({_id: req.params.messageId});
     res.json(removedMessage);
