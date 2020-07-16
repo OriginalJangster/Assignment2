@@ -15,7 +15,8 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
     "uuid": "^8.2.0",
-    "dotenv": "latest"
+    "dotenv": "latest",
+    "mongoose": "^5.9.18"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

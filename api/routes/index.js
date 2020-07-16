@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const MessageList = require('../../models/MessageList');
+const MessageList = require('../models/MessageList');
 
 // Get a list of messages
 router.get("/allMsg", async (req, res) => {
