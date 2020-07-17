@@ -39,7 +39,11 @@ server.use(cookieParser());
 server.use(express.static(path.join(__dirname, 'build')));
 server.use(bodyParser.json());
 
+// order matters here, * should come last
 server.use('/routes', indexRouter);
+server.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 // catch 404 and forward to error handler
 server.use(function(req, res, next) {
