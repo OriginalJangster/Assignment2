@@ -1,3 +1,5 @@
+Deployed App: https://mighty-peak-70073.herokuapp.com/
+
 CPSC 436I - Assignment 2: React and Redux
 
 DUE DATE: Monday, June 1 (10PM)
